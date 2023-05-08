@@ -18,7 +18,7 @@ const Login = () => {
     }
   return (
     <div className="h-[100vh] flex justify-center items-center">
-      <form onSubmit={handleLogin} className="flex flex-col gap-3 shadow-xl p-6 container mx-auto w-1/2 lg:w-1/3">
+      <form onSubmit={handleLogin} className="flex flex-col gap-3 shadow-xl p-6 container md:mx-auto mx-5 md:w-1/2 lg:w-1/3">
         <h2 className="text-xl font-bold text-blue-500">Login to continue</h2>
         <label className="font-semibold">Enter Username</label>
         <input placeholder="Enter Username" type="text" name="name" className="py-2 px-4 w-full border-2 rounded-md border-blue-400 focus:outline-blue-600"/>
