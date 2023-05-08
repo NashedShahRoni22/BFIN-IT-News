@@ -24,7 +24,7 @@ const SearchBox = () => {
     { value: "automobile", label: "automobile" },
   ];
   return (
-    <div className="flex items-center justify-center h-[40vh] bg-blue-200">
+    <div className="flex items-center justify-center py-20 bg-blue-200 container mx-auto">
       <form className="w-64" onSubmit={handleSelectChange}>
         <label htmlFor="selectInput" className="block mb-2 text-xl font-bold">
           Select Categorey:

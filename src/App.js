@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import SearchBox from "./pages/SearchBox";
 import axios from "axios";
-import NewsPage from "./pages/NewsPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 export const AppContext = createContext();
 
@@ -10,9 +11,21 @@ function App() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const url = `https://inshorts.deta.dev/news?category=${categorey}`
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/home",
+      element: <Home />,
+    },
+  ]);
 
-  //get the from photos_url
+  //news api
+  const url = `https://inshorts.deta.dev/news?category=${categorey}`;
+
+  //get news data
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -29,13 +42,12 @@ function App() {
     isLoading,
     data,
     setCategorey,
-    categorey
+    categorey,
   };
-  
+
   return (
     <AppContext.Provider value={appInfo}>
-      <SearchBox/>
-      <NewsPage/>
+      <RouterProvider router={router} />
     </AppContext.Provider>
   );
 }

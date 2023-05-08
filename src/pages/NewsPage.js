@@ -10,11 +10,11 @@ const NewsPage = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="container mx-auto my-10">
-          <h1 className="text-xl font-bold text-center">
-            Total {data.length} news showing {categorey}
+        <div className="container mx-auto">
+          <h1 className="text-xl font-bold my-10 text-center">
+            Total {data.length} news showing <span className="text-blue-600">{categorey}</span> categorey
           </h1>
-          <div className="mt-5 mx-5 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mx-5 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {
                 data.map((d) => <NewsBox key={d.id} d={d}/>)
             }
