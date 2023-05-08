@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useEffect, useState } from "react";
+import SearchBox from "./pages/SearchBox";
+import axios from "axios";
+import NewsPage from "./pages/NewsPage";
+
+export const AppContext = createContext();
 
 function App() {
+  const [categorey, setCategorey] = useState("all");
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const url = `https://inshorts.deta.dev/news?category=${categorey}`
+
+  //get the from photos_url
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data.data);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, [url]);
+
+  //sending app info
+  const appInfo = {
+    isLoading,
+    data,
+    setCategorey,
+    categorey
+  };
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={appInfo}>
+      <SearchBox/>
+      <NewsPage/>
+    </AppContext.Provider>
   );
 }
 
